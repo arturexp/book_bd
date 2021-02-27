@@ -4,12 +4,12 @@ import sqlite3
 def connect():
     conn = sqlite3.connect("books.db")
     cur = conn.cursor()
-    cur.execute("CREATE TABLE IF NOT EXISTS book ("
-                "id INTEGER PRIMARY KEY, "
-                "title TEXT, "
-                "author TEXT, " 
-                "year INTEGER, "
-                "isbn INTEGER")
+    cur.execute("""CREATE TABLE IF NOT EXISTS book (
+                id INTEGER PRIMARY KEY, 
+                title TEXT,
+                author TEXT,
+                year INTEGER,
+                isbn INTEGER)""")
     conn.commit()
     conn.close()
 
@@ -43,7 +43,7 @@ def search(title="", author="", year="", isbn=""):
 def delete(id):
     conn = sqlite3.connect("books.db")
     cur = conn.cursor()
-    cur.execute("DELETE FROM book WHERE od=?", (id, ))
+    cur.execute("DELETE FROM book WHERE id=?", (id, ))
     conn.commit()
     conn.close()
 
